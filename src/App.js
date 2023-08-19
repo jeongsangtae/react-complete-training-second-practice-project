@@ -6,7 +6,7 @@ import CalculatorForm from "./Component/CalculatorForm";
 import ResultTable from "./Component/ResultTable";
 
 const App = () => {
-  const [calculateResult, setCalculateResult] = useState();
+  const [saveCalculateData, setSaveCalculateData] = useState();
 
   const calculateHandler = (userInput) => {
     // Should be triggered when form is submitted
@@ -33,19 +33,27 @@ const App = () => {
     }
 
     // do something with yearlyData ...
+  };
 
-    const calculateResultValue = () => {};
+  const saveCalculateDataHandler = (enteredCalculateData) => {
+    setSaveCalculateData((prevCalculateData) => {
+      return [enteredCalculateData, ...prevCalculateData];
+    });
+    // const calculateData = {
+    //   ...enteredCalculateData,
+    //   id: Math.random().toString(),
+    // };
   };
 
   return (
     <div>
       <Header image={logo} />
-      <CalculatorForm />
+      <CalculatorForm onSaveCalculateData={saveCalculateDataHandler} />
 
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
 
-      <ResultTable />
+      <ResultTable calculateData={saveCalculateData} />
     </div>
   );
 };
