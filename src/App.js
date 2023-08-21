@@ -1,23 +1,23 @@
 import logo from "./assets/investment-calculator-logo.png";
 import React, { useState } from "react";
 
-import Header from "./Component/Header";
-import CalculatorForm from "./Component/CalculatorForm";
-import ResultTable from "./Component/ResultTable";
+import Header from "./components/Header";
+import CalculatorForm from "./components/CalculatorForm";
+import ResultTable from "./components/ResultTable";
 
 const App = () => {
   const [saveCalculateData, setSaveCalculateData] = useState();
 
-  const calculateHandler = (userInput) => {
+  const calculateHandler = (enteredCalculateData) => {
     // Should be triggered when form is submitted
     // You might not directly want to bind it to the submit event on the form though...
 
     const yearlyData = []; // per-year results
 
-    let currentSavings = +userInput["current-savings"]; // feel free to change the shape of this input object!
-    const yearlyContribution = +userInput["yearly-contribution"]; // as mentioned: feel free to change the shape...
-    const expectedReturn = +userInput["expected-return"] / 100;
-    const duration = +userInput["duration"];
+    let currentSavings = +enteredCalculateData.currentSaveObject; // feel free to change the shape of this input object!
+    const yearlyContribution = +enteredCalculateData.yearlyContributionObject; // as mentioned: feel free to change the shape...
+    const expectedReturn = +enteredCalculateData.expectedReturn / 100;
+    const duration = +enteredCalculateData.duration;
 
     // The below code calculates yearly results (total savings, interest etc)
     for (let i = 0; i < duration; i++) {
@@ -30,25 +30,33 @@ const App = () => {
         savingsEndOfYear: currentSavings,
         yearlyContribution: yearlyContribution,
       });
+
+      console.log(enteredCalculateData);
+      // setSaveCalculateData((prevCalculateData) => {
+      //   return [enteredCalculateData, ...prevCalculateData];
+      // });
+      setSaveCalculateData(yearlyData);
+      console.log(yearlyData);
     }
 
     // do something with yearlyData ...
   };
 
-  const saveCalculateDataHandler = (enteredCalculateData) => {
-    setSaveCalculateData((prevCalculateData) => {
-      return [enteredCalculateData, ...prevCalculateData];
-    });
-    // const calculateData = {
-    //   ...enteredCalculateData,
-    //   id: Math.random().toString(),
-    // };
-  };
+  // const saveCalculateDataHandler = (enteredCalculateData) => {
+  //   console.log(enteredCalculateData);
+  //   setSaveCalculateData((prevCalculateData) => {
+  //     return [enteredCalculateData, ...prevCalculateData];
+  //   });
+  //  const calculateData = {
+  //    ...enteredCalculateData,
+  //    id: Math.random().toString(),
+  //   // };
+  // };
 
   return (
     <div>
       <Header image={logo} />
-      <CalculatorForm onSaveCalculateData={saveCalculateDataHandler} />
+      <CalculatorForm onSaveCalculateData={calculateHandler} />
 
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
