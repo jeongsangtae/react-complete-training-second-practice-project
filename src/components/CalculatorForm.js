@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import styled from "./CalculatorForm.module.css";
+
 const CalculatorForm = (props) => {
   // const [calculateValue, setCalculateValue] = useState();
   const [currentSaveValue, setCurrentSaveValue] = useState("");
@@ -45,8 +47,8 @@ const CalculatorForm = (props) => {
   };
 
   return (
-    <form className="form">
-      <div className="input-group">
+    <form className={styled.form}>
+      <div className={styled["input-group"]}>
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
           <input
@@ -64,7 +66,7 @@ const CalculatorForm = (props) => {
           />
         </p>
       </div>
-      <div className="input-group">
+      <div className={styled["input-group"]}>
         <p>
           <label htmlFor="expected-return">
             Expected Interest (%, per year)
@@ -80,13 +82,17 @@ const CalculatorForm = (props) => {
           <input type="number" id="duration" onChange={durationHandler} />
         </p>
       </div>
-      <p className="actions">
-        <button type="reset" className="buttonAlt" onClick={resetEventHandler}>
+      <p className={styled.actions}>
+        <button
+          type="reset"
+          className={styled.buttonAlt}
+          onClick={resetEventHandler}
+        >
           Reset
         </button>
         <button
           type="submit"
-          className="button"
+          className={styled.button}
           onClick={formSubmitEventHandler}
         >
           Calculate

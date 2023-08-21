@@ -1,8 +1,10 @@
 import React from "react";
 
+import styled from "./ResultTable.module.css";
+
 const ResultTable = (props) => {
   return (
-    <table className="result">
+    <table className={styled.result}>
       <thead>
         <tr>
           <th>Year</th>
@@ -18,10 +20,10 @@ const ResultTable = (props) => {
           // investedCapital = calculateResult.savingsEndOfYear - totalInterest;
           <tr>
             <td>{calculateResult.year}</td>
-            <td>{calculateResult.savingsEndOfYear}</td>
-            <td>{calculateResult.yearlyInterest}</td>
-            <td>{calculateResult.totalInterest}</td>
-            <td>{calculateResult.investedCapital}</td>
+            <td>${calculateResult.savingsEndOfYear}</td>
+            <td>${calculateResult.yearlyInterest}</td>
+            <td>${calculateResult.totalInterest}</td>
+            <td>${calculateResult.investedCapital}</td>
           </tr>
         ))}
       </tbody>
