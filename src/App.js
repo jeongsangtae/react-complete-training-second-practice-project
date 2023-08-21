@@ -14,6 +14,7 @@ const App = () => {
 
     const yearlyData = []; // per-year results
 
+    let totalInterest = 0;
     let currentSavings = +enteredCalculateData.currentSaveObject; // feel free to change the shape of this input object!
     const yearlyContribution = +enteredCalculateData.yearlyContributionObject; // as mentioned: feel free to change the shape...
     const expectedReturn = +enteredCalculateData.expectedReturn / 100;
@@ -23,12 +24,16 @@ const App = () => {
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
       currentSavings += yearlyInterest + yearlyContribution;
+      totalInterest += yearlyInterest;
+      const investedCapital = currentSavings - totalInterest;
       yearlyData.push({
         // feel free to change the shape of the data pushed to the array!
         year: i + 1,
         yearlyInterest: yearlyInterest,
         savingsEndOfYear: currentSavings,
         yearlyContribution: yearlyContribution,
+        totalInterest: totalInterest,
+        investedCapital: investedCapital,
       });
 
       console.log(enteredCalculateData);
