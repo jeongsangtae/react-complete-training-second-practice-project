@@ -2,12 +2,19 @@ import React, { useState } from "react";
 
 import styled from "./CalculatorForm.module.css";
 
+const initialUserInput = {
+  "current-savings": 10000,
+  "yearly-contribution": 1200,
+  "expected-return": 7,
+  duration: 10,
+};
+
 const CalculatorForm = (props) => {
   // const [calculateValue, setCalculateValue] = useState();
-  const [currentSaveValue, setCurrentSaveValue] = useState("");
-  const [yearlyContributionValue, setyearlyContributionValue] = useState("");
-  const [expectedReturnValue, setExpectedReturnValue] = useState("");
-  const [durationValue, setDurationValue] = useState("");
+  // const [currentSaveValue, setCurrentSaveValue] = useState("");
+  // const [yearlyContributionValue, setyearlyContributionValue] = useState("");
+  // const [expectedReturnValue, setExpectedReturnValue] = useState("");
+  // const [durationValue, setDurationValue] = useState("");
 
   // const currentSaveHandler = (event) => {
   //   setCurrentSaveValue(event.target.value);
@@ -25,37 +32,54 @@ const CalculatorForm = (props) => {
   //   setDurationValue(event.target.value);
   // };
 
-  const inputChangeHandler = (input, value) => {
-    console.log(input, value);
-  };
+  // const resetEventHandler = () => {
+  //   setCurrentSaveValue("");
+  //   setyearlyContributionValue("");
+  //   setExpectedReturnValue("");
+  //   setDurationValue("");
+  // };
 
-  const resetEventHandler = () => {
-    setCurrentSaveValue("");
-    setyearlyContributionValue("");
-    setExpectedReturnValue("");
-    setDurationValue("");
-  };
+  // const formSubmitEventHandler = (event) => {
+  //   event.preventDefault();
 
-  const formSubmitEventHandler = (event) => {
+  //   const calculateData = {
+  //     currentSaveObject: currentSaveValue,
+  //     yearlyContributionObject: yearlyContributionValue,
+  //     expectedReturn: expectedReturnValue,
+  //     duration: durationValue,
+  //   };
+
+  //   // setCalculateValue();
+  //   props.onSaveCalculateData(calculateData);
+  //   setCurrentSaveValue("");
+  //   setyearlyContributionValue("");
+  //   setExpectedReturnValue("");
+  //   setDurationValue("");
+  // };
+
+  const [userInput, setUserInput] = useState(initialUserInput);
+
+  const submitHandler = (event) => {
     event.preventDefault();
+  };
 
-    const calculateData = {
-      currentSaveObject: currentSaveValue,
-      yearlyContributionObject: yearlyContributionValue,
-      expectedReturn: expectedReturnValue,
-      duration: durationValue,
-    };
+  const resetHandler = () => {
+    setUserInput(initialUserInput);
+  };
 
-    // setCalculateValue();
-    props.onSaveCalculateData(calculateData);
-    setCurrentSaveValue("");
-    setyearlyContributionValue("");
-    setExpectedReturnValue("");
-    setDurationValue("");
+  const inputChangeHandler = (input, value) => {
+    // console.log(input, value);
+    setUserInput((prevInput) => {
+      return {
+        ...prevInput,
+        [input]: value,
+      };
+    });
   };
 
   return (
-    <form onSubmit={formSubmitEventHandler} className={styled.form}>
+    // <form onSubmit={formSubmitEventHandler} className={styled.form}>
+    <form onSubmit={submitHandler} className={styled.form}>
       <div className={styled["input-group"]}>
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
@@ -68,6 +92,7 @@ const CalculatorForm = (props) => {
           <input
             type="number"
             id="current-savings"
+            value={userInput["current-savings"]}
             onChange={(event) =>
               inputChangeHandler("current-savings", event.target.value)
             }
@@ -84,6 +109,7 @@ const CalculatorForm = (props) => {
           <input
             type="number"
             id="yearly-contribution"
+            value={userInput["yearly-contribution"]}
             onChange={(event) =>
               inputChangeHandler("yearly-contribution", event.target.value)
             }
@@ -104,6 +130,7 @@ const CalculatorForm = (props) => {
           <input
             type="number"
             id="expected-return"
+            value={userInput["expected-return"]}
             onChange={(event) =>
               inputChangeHandler("expected-return", event.target.value)
             }
@@ -120,6 +147,7 @@ const CalculatorForm = (props) => {
           <input
             type="number"
             id="duration"
+            value={userInput["duration"]}
             onChange={(event) =>
               inputChangeHandler("duration", event.target.value)
             }
@@ -127,10 +155,17 @@ const CalculatorForm = (props) => {
         </p>
       </div>
       <p className={styled.actions}>
-        <button
+        {/* <button
           type="reset"
           className={styled.buttonAlt}
           onClick={resetEventHandler}
+        >
+          Reset
+        </button> */}
+        <button
+          type="reset"
+          className={styled.buttonAlt}
+          onClick={resetHandler}
         >
           Reset
         </button>
