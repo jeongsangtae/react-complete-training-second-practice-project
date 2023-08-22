@@ -1,9 +1,8 @@
-import logo from "./assets/investment-calculator-logo.png";
 import React, { useState } from "react";
 
-import Header from "./components/Header";
-import CalculatorForm from "./components/CalculatorForm";
-import ResultTable from "./components/ResultTable";
+import Header from "./components/Header/Header";
+import CalculatorForm from "./components/CalculatorForm/CalculatorForm";
+import ResultTable from "./components/ResultTable/ResultTable";
 
 const App = () => {
   const [saveCalculateData, setSaveCalculateData] = useState();
@@ -60,7 +59,7 @@ const App = () => {
 
   return (
     <div>
-      <Header image={logo} />
+      <Header />
       <CalculatorForm onSaveCalculateData={calculateHandler} />
 
       {/* Todo: Show below table conditionally (only once result data is available) */}
