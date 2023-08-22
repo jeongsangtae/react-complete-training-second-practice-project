@@ -9,20 +9,24 @@ const CalculatorForm = (props) => {
   const [expectedReturnValue, setExpectedReturnValue] = useState("");
   const [durationValue, setDurationValue] = useState("");
 
-  const currentSaveHandler = (event) => {
-    setCurrentSaveValue(event.target.value);
-  };
+  // const currentSaveHandler = (event) => {
+  //   setCurrentSaveValue(event.target.value);
+  // };
 
-  const yearlyContributionHandler = (event) => {
-    setyearlyContributionValue(event.target.value);
-  };
+  // const yearlyContributionHandler = (event) => {
+  //   setyearlyContributionValue(event.target.value);
+  // };
 
-  const expectedReturnHandler = (event) => {
-    setExpectedReturnValue(event.target.value);
-  };
+  // const expectedReturnHandler = (event) => {
+  //   setExpectedReturnValue(event.target.value);
+  // };
 
-  const durationHandler = (event) => {
-    setDurationValue(event.target.value);
+  // const durationHandler = (event) => {
+  //   setDurationValue(event.target.value);
+  // };
+
+  const inputChangeHandler = (input, value) => {
+    console.log(input, value);
   };
 
   const resetEventHandler = () => {
@@ -44,25 +48,45 @@ const CalculatorForm = (props) => {
 
     // setCalculateValue();
     props.onSaveCalculateData(calculateData);
+    setCurrentSaveValue("");
+    setyearlyContributionValue("");
+    setExpectedReturnValue("");
+    setDurationValue("");
   };
 
   return (
-    <form className={styled.form}>
+    <form onSubmit={formSubmitEventHandler} className={styled.form}>
       <div className={styled["input-group"]}>
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
+          {/* <input
+            type="number"
+            id="current-savings"
+            value={currentSaveValue}
+            onChange={currentSaveHandler}
+          /> */}
           <input
             type="number"
             id="current-savings"
-            onChange={currentSaveHandler}
+            onChange={(event) =>
+              inputChangeHandler("current-savings", event.target.value)
+            }
           />
         </p>
         <p>
           <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
+          {/* <input
+            type="number"
+            id="yearly-contribution"
+            value={yearlyContributionValue}
+            onChange={yearlyContributionHandler}
+          /> */}
           <input
             type="number"
             id="yearly-contribution"
-            onChange={yearlyContributionHandler}
+            onChange={(event) =>
+              inputChangeHandler("yearly-contribution", event.target.value)
+            }
           />
         </p>
       </div>
@@ -71,15 +95,35 @@ const CalculatorForm = (props) => {
           <label htmlFor="expected-return">
             Expected Interest (%, per year)
           </label>
+          {/* <input
+            type="number"
+            id="expected-return"
+            value={expectedReturnValue}
+            onChange={expectedReturnHandler}
+          /> */}
           <input
             type="number"
             id="expected-return"
-            onChange={expectedReturnHandler}
+            onChange={(event) =>
+              inputChangeHandler("expected-return", event.target.value)
+            }
           />
         </p>
         <p>
           <label htmlFor="duration">Investment Duration (years)</label>
-          <input type="number" id="duration" onChange={durationHandler} />
+          {/* <input
+            type="number"
+            id="duration"
+            value={durationValue}
+            onChange={durationHandler}
+          /> */}
+          <input
+            type="number"
+            id="duration"
+            onChange={(event) =>
+              inputChangeHandler("duration", event.target.value)
+            }
+          />
         </p>
       </div>
       <p className={styled.actions}>
@@ -90,11 +134,7 @@ const CalculatorForm = (props) => {
         >
           Reset
         </button>
-        <button
-          type="submit"
-          className={styled.button}
-          onClick={formSubmitEventHandler}
-        >
+        <button type="submit" className={styled.button}>
           Calculate
         </button>
       </p>
