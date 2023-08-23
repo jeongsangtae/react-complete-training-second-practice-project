@@ -61,6 +61,8 @@ const CalculatorForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    props.onSaveCalculateData(userInput);
   };
 
   const resetHandler = () => {
