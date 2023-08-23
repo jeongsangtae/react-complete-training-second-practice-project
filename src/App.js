@@ -79,7 +79,13 @@ const App = () => {
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
 
-      <ResultTable calculateData={saveCalculateData} />
+      {!userInput && <p>No investment calcuated yet.</p>}
+      {userInput && (
+        <ResultTable
+          calculateData={yearlyData}
+          initialInvestment={userInput["current-savings"]}
+        />
+      )}
     </div>
   );
 };
